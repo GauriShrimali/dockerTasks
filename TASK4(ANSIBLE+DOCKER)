@@ -1,0 +1,25 @@
+#DOCKERFILE
+
+FROM ubuntu
+MAINTAINER shrimali.net@gmail.com
+RUN apt-get update
+RUN apt-get install docker.io -y
+RUN apt-get install ansible -y
+RUN apt install python3-pip -y
+RUN pip3 install docker
+
+#PYTHON FILE
+
+import os
+for i in range(1,11):
+    print("docker run --name alpinec"+str(i)+" alpine -d ping fb.com")
+
+#YML FILE
+
+---
+ - hosts: localhost
+   tasks:
+    - name: creating multiple containers
+      shell: python3 pythonscript.py
+      register: x
+    - debug: var=x
